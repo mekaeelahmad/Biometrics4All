@@ -1,5 +1,5 @@
 import re
-import addressUpdate
+from .. import addressUpdate
 
 def format_phone(phone_number):
     # removing all non-digit characters
