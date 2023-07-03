@@ -12,12 +12,20 @@ def format_phone(phone_number):
     formatted_phone_number = f'({phone_number[:3]}) {phone_number[3:6]}-{phone_number[6:]}'
     return formatted_phone_number
 
-fixthis = """Nicole Ann
-De La Torre
-The DLT Group, LLC
-thedltgroup@gmail.com
-818-309-5847
-6603 Maplegrove St, Oak Park, CA 91377
+"""fix this in the format:
+FirstName
+LastName
+BusinessName
+Email
+Number (can be any format, just needs 10 digits)
+Incomplete Address (needs to at least include address line 1 and city)
+"""
+fixthis = """Mekaeel
+Ahmad
+Testing
+mekaeel@berkeley.edu
+9093430476
+3045 Wilderness Drive Corona
 """
 #Ctrl + L below to copy line and send client after sending initial quote 
 #Thank you for reaching out to us regarding your Live Scan needs.  I just sent you a separate email with information and quotes.  Please do not hesitate to reach out with additional questions.
@@ -31,6 +39,12 @@ def omit_country(address):
 
     # If the string wasn't split, return it as is
     return address
+
+def split_address(fulladdress):
+    split = fulladdress.split(', ')
+    address1 = split[0]
+    address2 = ', '.join(split[1:-1]) + ', ' + split[-1]
+    return address1, address2
 
 def process_string(input_string):
     # Splitting the string into lines
@@ -50,7 +64,8 @@ def process_string(input_string):
     incomplete_address = lines[5]
     complete_address = addressUpdate.correct_address(addressUpdate.api_key, incomplete_address)
     complete_address = omit_country(complete_address)
-    output_string = '\n'.join([line1, business_name, email, phone_number, complete_address])
+    address1, address2 = split_address(complete_address)
+    output_string = '\n'.join([line1, business_name, email, phone_number, address1, address2])
     
     return output_string
 
