@@ -38,17 +38,18 @@ def process_hours(hours: str) -> Dict[str, str]:
             # Split the string only on the first ':'
             day_str, time_str = hour.split(':', 1)
             days = []
-            # Consecutive days
+            # handles the case for consecutive days
             if '-' in day_str:
                 start_day, end_day = day_str.split('-')
                 days = list(day_dict.keys())[list(day_dict.keys()).index(start_day): list(day_dict.keys()).index(end_day)+1]
-            # Individual days
+            # handles the case for individual days
             else:
                 days = day_str.split(',')
             days = [day_dict[day] for day in days]
             for day in days:
                 hours_dict[day] = process_times(time_str.strip())
         except Exception as e:
+            #throws error if error with formatting
             print(f"Error occurred for {hour} with error {str(e)}")
             continue
     return hours_dict
