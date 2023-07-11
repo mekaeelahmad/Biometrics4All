@@ -1,7 +1,7 @@
 import pandas as pd
 from typing import List, Dict
 
-# Abbreviation to full day names mapping
+# basically creates a mapping between the abbreviated days and the full day names for the columns in the excel sheet
 day_dict = {
     'Su': 'Sunday',
     'M': 'Monday',
@@ -12,7 +12,7 @@ day_dict = {
     'Sa': 'Saturday'
 }
 
-# Process individual time range string
+# once they're seperated, this processes individual timings. 
 def process_time_range(time_range: str) -> str:
     start, end = time_range.split('-')
     if len(start) <= 4: # covers 'HAM', 'HPM', 'HHPM', 'HHAM'
@@ -21,12 +21,12 @@ def process_time_range(time_range: str) -> str:
         end = end[:-2] + ':00' + end[-2:]
     return start.upper() + '-' + end.upper()
 
-# Process time string
+# process time string
 def process_times(times: str) -> str:
     time_ranges = times.split(',')
     return ', '.join(process_time_range(time_range.strip()) for time_range in time_ranges)
 
-# Process full 'day:time' string
+# processes full 'day:time' string
 def process_hours(hours: str) -> Dict[str, str]:
     if not isinstance(hours, str):
         return {day: '' for day in day_dict.values()}
@@ -53,10 +53,10 @@ def process_hours(hours: str) -> Dict[str, str]:
             continue
     return hours_dict
 
-# Read the file
+# uses pandas to read the excel file
 df = pd.read_excel('Locations.xlsx', sheet_name='hours')
 
-# Process 'Store Hours' column
+# processes 'Store Hours' column
 for idx, row in df.iterrows():
     store_hours = row['Store Hours']
     day_hours = process_hours(store_hours)
