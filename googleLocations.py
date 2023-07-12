@@ -15,12 +15,6 @@ day_dict = {
 # Process individual time range string
 def process_time_range(time_range: str) -> str:
     start, end = time_range.split('-')
-<<<<<<< HEAD
-    if len(start) <= 4: # covers 'HAM', 'HPM', 'HHPM', 'HHAM'
-        start = start[:-2] + ':00' + start[-2:]
-    if len(end) <= 4:
-        end = end[:-2] + ':00' + end[-2:]
-=======
 
     if len(start) <= 4: # covers 'HAM', 'HPM', 'HHPM', 'HHAM'
         start = start[:-2].zfill(2) + ':00' + start[-2:]
@@ -32,15 +26,11 @@ def process_time_range(time_range: str) -> str:
     else:
         end = end[:-5].zfill(2) + ':' + end[-5:-2] + end[-2:]
 
->>>>>>> 0d46ed948221fe8de0388a71cdd54eda3eb8a616
     return start.upper() + '-' + end.upper()
 
 # Process time string
 def process_times(times: str) -> str:
-<<<<<<< HEAD
-=======
     times = times.replace('_x000D_', '') # remove line breaks added by Excel
->>>>>>> 0d46ed948221fe8de0388a71cdd54eda3eb8a616
     time_ranges = times.split(',')
     return ', '.join(process_time_range(time_range.strip()) for time_range in time_ranges)
 
@@ -82,8 +72,4 @@ for idx, row in df.iterrows():
         df.at[idx, day] = hours
 
 # Save the DataFrame to an Excel file
-<<<<<<< HEAD
-df.to_excel('Updated_Locations.xlsx', sheet_name='hours', index=False)
-=======
 df.to_excel('UpdatedLocations.xlsx', sheet_name='hours', index=False)
->>>>>>> 0d46ed948221fe8de0388a71cdd54eda3eb8a616
