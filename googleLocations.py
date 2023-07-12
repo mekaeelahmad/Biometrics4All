@@ -34,7 +34,7 @@ def process_times(times: str) -> str:
     time_ranges = times.split(',')
     return ', '.join(process_time_range(time_range.strip()) for time_range in time_ranges)
 
-# Process full 'day:time' string
+# Process full 'day:time' strings
 def process_hours(hours: str) -> Dict[str, str]:
     if not isinstance(hours, str):
         return {day: '' for day in day_dict.values()}
