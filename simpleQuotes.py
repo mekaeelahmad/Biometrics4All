@@ -20,12 +20,12 @@ Email
 Number (can be any format, just needs 10 digits)
 Incomplete Address (needs to at least include address line 1 and city)
 """
-fixthis = """Krystal
-Hampton
-1227 Mobile Notary and Livescan Services
-notary1227@gmail.com
-3237075158
-1652 E Avenue q6  Palmdale California 93550
+fixthis = """MHEL
+MOJICA
+The UPS Store
+MHELMOJICA007@GMAIL.COM
+949-554-3464
+3045 WILDERNESS DR, CORONA, CA, 92882
 """
 #Ctrl + L below to copy line and send client after sending initial quote 
 #Thank you for reaching out to us regarding your Live Scan needs.  I just sent you a separate email with information and quotes.  Please do not hesitate to reach out with additional questions.
