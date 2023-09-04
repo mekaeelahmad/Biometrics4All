@@ -62,13 +62,11 @@ def edit_and_save_as_pdf(business_name, phone_number, client_name, email, addres
 
     wb.sheets['CA Multi Tenprint'].api.ExportAsFixedFormat(0, f'{os.getcwd()}\\Quotes\\{business_name}.pdf')
     wb.close()
-    app.quit()
 
 
 
 def process_string(input_string):
     lines = input_string.strip().split('\n')
-    print(f"Debug - lines: {lines}") # Debugging lin
     
     first_name = lines[0]
     last_name = lines[1]
@@ -80,11 +78,6 @@ def process_string(input_string):
     phone_number = format_phone(lines[4]) 
     incomplete_address = lines[5]
     complete_address = addressUpdate.correct_address(addressUpdate.api_key, incomplete_address)
-    
-    if complete_address is None:
-        return "Error with address correction. Please check the input address."
-    print("Debug - complete_address:", complete_address)  # Debugging print (optional) 
-
     complete_address = omit_country(complete_address)
     address1, address2 = split_address(complete_address)
     output_string = '\n'.join([line1, business_name, email, phone_number, address1, address2])
@@ -94,16 +87,15 @@ def process_string(input_string):
 
 def process_input():
     input_string = text_widget.get("1.0", tk.END).strip()  # Get content from Text widget
-    if not input_string:
-        print("No input to process")
-        return
-
     text_widget.delete("1.0", tk.END)  # Clear the text widget
     result_label.config(text="Processing...")
-    print("Value of fixthis:", input_string)
-    print(process_string(input_string))
-    result_label.config(text="Input processed! Ready for next input.")
 
+    # Continue with your existing code here to process the input_string
+    print("Value of fixthis:", input_string)
+    # ... rest of your code
+    fixthis = input_string
+    print(process_string(fixthis))
+    result_label.config(text="Input processed! Ready for next input.")
 
 # Create a GUI window
 root = tk.Tk()
