@@ -30,7 +30,7 @@ def process_time_range(time_range: str) -> str:
 
 # Process time string
 def process_times(times: str) -> str:
-    times = times.replace('_x000D_', '') # remove line breaks added by Excel
+    times = times.replace('_x000D_', '') # remove line breaks added by Excel in case there are any
     time_ranges = times.split(',')
     return ', '.join(process_time_range(time_range.strip()) for time_range in time_ranges)
 
@@ -61,10 +61,9 @@ def process_hours(hours: str) -> Dict[str, str]:
             continue
     return hours_dict
 
-# Read the file
 df = pd.read_excel('Locations.xlsx', sheet_name='hours')
 
-# Process 'Store Hours' column
+# process 'Store Hours' column
 for idx, row in df.iterrows():
     store_hours = row['Store Hours']
     day_hours = process_hours(store_hours)
